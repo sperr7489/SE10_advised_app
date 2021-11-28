@@ -10,7 +10,7 @@ export const Header = () => {
   );
 };
 
-export const Contents = props => {
+export const Contents = () => {
   return (
     <View
       style={[
@@ -23,15 +23,11 @@ export const Contents = props => {
         },
       ]}>
       <Text
-        style={[
-          styles.text,
-          {color: 'red', fontSize: 50, letterSpacing: 20, marginBottom: 100},
-        ]}>
+        style={[styles.text, {color: 'red', fontSize: 50, letterSpacing: 20}]}>
         그거 맞아?
       </Text>
-      <View style={{width: 200, marginBottom: 20}}>
-        <EventButton title="시작하기" />
-      </View>
+      <EventButton />
+      <View style={{width: 200, marginBottom: 20}}></View>
     </View>
   );
 };
@@ -56,9 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contents: {
-    flex: 4,
-    backgroundColor: '#ff2',
-    height: 640,
+    height: 300,
   },
   footer: {
     flex: 1,

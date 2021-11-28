@@ -11,7 +11,7 @@ const EventButton = props => {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+
         padding: 15,
         margin: 10,
         borderRadius: 8,
@@ -29,6 +29,6 @@ const EventButton = props => {
   );
 };
 EventButton.defaultProps = {
-  title: 'button',
+  title: '서명확인',
 };
 export default EventButton;
