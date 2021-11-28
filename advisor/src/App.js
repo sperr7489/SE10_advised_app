@@ -63,18 +63,18 @@ import {startClock} from 'react-native-reanimated';
 import {Contents} from './components/Layout';
 import MainScreen from './Layout/MainScreen';
 
-function MyBackButton() {
-  const navigation = useNavigation();
+// function MyBackButton() {
+//   const navigation = useNavigation();
 
-  return (
-    <Button
-      title="Back"
-      onPress={() => {
-        navigation.goBack();
-      }}
-    />
-  );
-}
+//   return (
+//     <Button
+//       title="Back"
+//       onPress={() => {
+//         navigation.goBack();
+//       }}
+//     />
+//   );
+// }
 
 function HomeScreen({navigation: {navigate}}) {
   return (
@@ -90,15 +90,15 @@ function HomeScreen({navigation: {navigate}}) {
   );
 }
 
-function ProfileScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>go</Text>
-      <MyBackButton />
-      <StartScreen />
-    </View>
-  );
-}
+// function ProfileScreen() {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text>go</Text>
+//       <MyBackButton />
+//       <StartScreen />
+//     </View>
+//   );
+// }
 
 const Stack = createNativeStackNavigator();
 
@@ -107,7 +107,11 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={MainScreen} />
+        <Stack.Screen
+          name="Profile"
+          component={MainScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
