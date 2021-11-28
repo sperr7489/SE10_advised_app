@@ -1,15 +1,17 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import Counter from './components/Counter';
+import EventButton from './components/EventButton';
+import EventInput from './components/EventInput';
 import MyButton from './components/MyButton';
-
+import {Header, Contents, Footer} from './components/Layout';
 const App = () => {
   const name = 'kisung';
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: '#f22f',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
       }}>
@@ -17,7 +19,13 @@ const App = () => {
       <MyButton title="Button" />
       <MyButton title="Button">Children Button</MyButton> */}
       {/* <MyButton /> */}
-      <Counter />
+      {/* <EventButton />
+      <EventInput /> */}
+      <Header />
+      <Contents>
+        <EventButton />{' '}
+      </Contents>
+      <Footer />
     </View>
   );
 };
