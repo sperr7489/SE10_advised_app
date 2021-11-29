@@ -11,7 +11,8 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Chat"
+      screenOptions={{headerShown: false}}
+      initialRouteName="Mission"
       activeColor="#f0edf6"
       inactiveColor="#3e2465">
       <Tab.Screen

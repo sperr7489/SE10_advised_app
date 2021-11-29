@@ -5,7 +5,7 @@ import EventButton from './EventButton';
 export const Header = () => {
   return (
     <View style={[styles.container, styles.header]}>
-      <Text style={styles.text}>Header</Text>
+      <Text style={styles.text}>너똑바로 안하면 뒤져</Text>
     </View>
   );
 };
@@ -35,7 +35,7 @@ export const Contents = () => {
 export const Footer = () => {
   return (
     <View style={[styles.container, styles.footer]}>
-      <Text style={styles.text}>Footer</Text>
+      <Text style={styles.text}></Text>
     </View>
   );
 };
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     height: 80,
   },
   header: {
-    flex: 1,
+    flex: 0.5,
     backgroundColor: '#fff',
   },
   contents: {

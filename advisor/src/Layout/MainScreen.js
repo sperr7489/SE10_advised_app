@@ -1,12 +1,21 @@
 import React from 'react';
 import {View, Text, Button, TouchableOpacity} from 'react-native';
 import Tabs from '../navigation/Tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 const MainScreen = () => {
   return (
-    <NavigationContainer independent={true}>
-      <Tabs />
-    </NavigationContainer>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <NavigationContainer
+        theme={{
+          colors: {
+            ...DefaultTheme.colors,
+            background: 'white',
+          },
+        }}
+        independent={true}>
+        <Tabs />
+      </NavigationContainer>
+    </View>
   );
 };
 
