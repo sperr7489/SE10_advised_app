@@ -19,7 +19,7 @@ export const Contents = () => {
         {
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'space-evenly',
         },
       ]}>
       <Text

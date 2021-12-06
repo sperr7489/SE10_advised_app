@@ -11,7 +11,7 @@ const MissionCheckButton = ({screenName}) => {
       style={styles.button}
       onPress={() => navigation.navigate(screenName)}>
       {/* <Text style={styles.text}>{screenName}</Text> */}
-      <Image 
+      <Image
         source={require('../assets/icons/check.png')}
         style={{
           width: 40,
