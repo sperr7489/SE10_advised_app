@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Button, TextInput} from 'react-native';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MissionCheckButton from '../../components/MissionCheckButton';
 import MissionScreen from '../MissionScreen';
@@ -8,14 +7,37 @@ import MissionSetButton from '../../components/MissionSetButton';
 import TimePicker from '../../components/picker/TimePicker';
 import MissionInPut from '../../components/MissionInput';
 import Missionweight from '../../components/MissionWeight';
-const MissionSetScreen = () => {
+import {db} from '../../../firebase-config';
+import {setDoc, doc} from 'firebase/firestore/lite';
+
+const MissionSetScreen = ({route}) => {
   // 이 컴포넌트에서 timepicker 컴포넌트로부터 받아온 값을 밑의 값에다가 입력해주도록 한다.
+  const missionType = route.name;
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [missionDetail, setMissionDetail] = useState('');
   const [missionWeight, setMissionWeight] = useState('0');
   console.log(missionDetail);
   console.log(missionWeight);
+  console.log(startTime);
+  console.log(endTime);
+  console.log(missionType);
+  const setData = async () => {
+    const missionKey = String(Math.floor(Math.random() * 101));
+    // const citiesCol = collection(db, 'cities');
+    // const citySnapshot = await getDocs(citiesCol);
+    // const cityList = citySnapshot.docs.map(doc => doc.data());
+    // console.log(cityList);
+    // Add a new document in collection "cities"
+    await setDoc(doc(db, 'mission', `${missionKey}`), {
+      missionType: missionType,
+      start_time: startTime,
+      end_time: endTime,
+      mission_content: missionDetail,
+      weight: missionWeight,
+    });
+  };
+
   return (
     <View
       style={{
@@ -46,7 +68,7 @@ const MissionSetScreen = () => {
         <Missionweight setWeight={prevWeight => setMissionWeight(prevWeight)} />
       </View>
       <View style={styles.button}>
-        <MissionSetButton name="확인" screenName="Mission" />
+        <MissionSetButton press={setData} name="확인" screenName="Mission" />
         <MissionSetButton name="취소" screenName="Mission" />
       </View>
     </View>

@@ -8,12 +8,13 @@ import {useState, useRef, useEffect} from 'react';
 import {validateEmail, removeWhitespace} from './utils/common';
 import styled from 'styled-components';
 import Button from './components/Login/LoginButton';
-import {Alert} from 'react-native';
+import {Alert, View} from 'react-native';
 import {authentication} from '../firebase-config';
 import {db} from '../firebase-config';
 import {signInWithEmailAndPassword} from '@firebase/auth';
 import {useNavigation} from '@react-navigation/core';
 import {NavigationEvents} from 'react-navigation';
+import {Contents, Footer} from './components/Layout';
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -70,6 +71,9 @@ function HomeScreen({navigation: {navigate}}) {
   };
   return (
     <Container>
+      <View>
+        <Contents></Contents>
+      </View>
       <Input
         label="Email"
         value={email}

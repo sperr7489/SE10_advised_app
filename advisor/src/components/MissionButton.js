@@ -9,7 +9,7 @@ const MissionButton = ({screenName}) => {
   return (
     <Pressable
       style={styles.button}
-      onPress={() => navigation.navigate(screenName)}>
+      onPress={() => navigation.navigate(screenName, {name: {screenName}})}>
       <Text style={styles.text}>{screenName}</Text>
     </Pressable>
   );

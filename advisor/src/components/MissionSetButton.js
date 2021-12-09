@@ -4,12 +4,15 @@ import {Pressable, Text, View, Image} from 'react-native';
 import {color} from 'react-native-reanimated';
 import MissionScreen from '../screens/MissionScreen';
 import {StyleSheet} from 'react-native';
-const MissionSetButton = ({name, screenName}) => {
+const MissionSetButton = ({name, screenName, press}) => {
   const navigation = useNavigation();
   return (
     <Pressable
       style={styles.button}
-      onPress={() => navigation.navigate(screenName)}>
+      onPress={() => {
+        press(); //함수이다.
+        navigation.navigate(screenName);
+      }}>
       {/* <Text style={styles.text}>{screenName}</Text> */}
       <Text>{name}</Text>
     </Pressable>

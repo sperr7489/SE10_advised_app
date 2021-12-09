@@ -68,7 +68,6 @@ const SignUpScreen = () => {
     createUserWithEmailAndPassword(authentication, email, password)
       .then(re => {
         console.log(re);
-        setIsSign(true); //true로 만들어주고 이를 통해 화면을 이동한다.
         navigation.navigate('Home');
       })
       .catch(re => {
