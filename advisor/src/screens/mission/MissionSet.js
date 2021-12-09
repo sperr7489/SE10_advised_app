@@ -10,6 +10,7 @@ import Missionweight from '../../components/MissionWeight';
 import {db} from '../../../firebase-config';
 import {setDoc, doc} from 'firebase/firestore/lite';
 
+global.count = 0;
 const MissionSetScreen = ({route}) => {
   // 이 컴포넌트에서 timepicker 컴포넌트로부터 받아온 값을 밑의 값에다가 입력해주도록 한다.
   const missionType = route.name;
@@ -22,20 +23,21 @@ const MissionSetScreen = ({route}) => {
   console.log(startTime);
   console.log(endTime);
   console.log(missionType);
+  const [missionKey, setMissionKey] = useState(1);
   const setData = async () => {
-    const missionKey = String(Math.floor(Math.random() * 101));
     // const citiesCol = collection(db, 'cities');
     // const citySnapshot = await getDocs(citiesCol);
     // const cityList = citySnapshot.docs.map(doc => doc.data());
     // console.log(cityList);
     // Add a new document in collection "cities"
-    await setDoc(doc(db, 'mission', `${missionKey}`), {
+    await setDoc(doc(db, 'mission', `${global.count}`), {
       missionType: missionType,
       start_time: startTime,
       end_time: endTime,
       mission_content: missionDetail,
       weight: missionWeight,
     });
+    global.count++;
   };
 
   return (

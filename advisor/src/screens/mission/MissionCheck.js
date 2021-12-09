@@ -7,13 +7,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {SectionList} from 'react-native';
 import {Value} from 'react-native-reanimated';
 
-const getData = async () => {
-  const missionCol = collection(db, 'mission');
-  const missionSnapshot = await getDocs(missionCol);
-  const List = missionSnapshot.docs.map(doc => doc.data());
-  return List;
-};
-
+const Item = ({title}) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
 const MissionCheckScreen = () => {
   // const getData = async () => {
   //   const citiesCol = collection(db, 'cities');
@@ -61,21 +59,18 @@ const MissionCheckScreen = () => {
   return (
     <View>
       <SafeAreaView>
-        {/* <FlatList
+        <FlatList
           data={missionList}
-          renderItem={MissionElem}
-          keyExtractor={props => props.missionType}></FlatList> */}
-        <MissionElem
-          type="바보"
-          text="굳"
-          weight="4"
-          endTime="난 몰라"></MissionElem>
+          renderItem={({item}) => (
+            <MissionElem
+              type={item.missionType}
+              text={item.mission_content}
+              weight={item.weight}
+              endTime={item.end_time}
+            />
+          )}
+        />
       </SafeAreaView>
-      <Text>이곳은 mission을 확인하는 곳</Text>
-      <MissionElem />
-
-      <Button title="getDB" onPress={getData}></Button>
-      <Button title="setDB" onPress={setData}></Button>
     </View>
   );
 };
