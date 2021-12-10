@@ -10,7 +10,7 @@ const MissionSetButton = ({name, screenName, press}) => {
     <Pressable
       style={styles.button}
       onPress={() => {
-        press(); //함수이다.
+        if (press) press(); //함수이다.
         navigation.navigate(screenName);
       }}>
       {/* <Text style={styles.text}>{screenName}</Text> */}

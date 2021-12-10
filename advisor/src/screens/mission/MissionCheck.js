@@ -5,8 +5,6 @@ import {collection, getDocs, setDoc, doc} from 'firebase/firestore/lite';
 import MissionElem from '../../components/mission/missionElem';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SectionList} from 'react-native';
-import {cos, Value} from 'react-native-reanimated';
-import WeightContext from '../../Context/weightContext';
 import {useContext} from 'react';
 import {WContext} from '../../Context/weightContext';
 import MissionCheckButton from '../../components/MissionCheckButton';
@@ -31,33 +29,37 @@ const MissionCheckScreen = ({navigation: {goBack}}) => {
     const missionCol = collection(db, 'mission');
     const missionSnapshot = await getDocs(missionCol);
     const list = missionSnapshot.docs.map(doc => doc.data());
+    list.map(x => {
+      test += x.weight;
+      setTotalWeight(test);
+    });
     setMissionList(list);
   };
-
   useEffect(() => {
     getData();
-    // console.log(missionList[0]);
-    missionList.map(x => {
-      test += Number(x.weight);
-      console.log(x.weight, typeof x.weight);
-    });
-    setTotalWeight(test);
+    // // console.log(missionList[0]);
+    // missionList.map(x => {
+    //   test += Number(x.weight);
+    //   console.log(test, '+', x.weight);
+    // });
+    // setTotalWeight(test);
+    // console.log(totalWeight, '전체가 이게 맞아?');
   }, []);
-
   const checkRateWeight = () => {
-    const rate = Math.round((value.weight / totalWeight) * 100);
+    const rate = Math.round((value.result / totalWeight) * 100);
+    console.log(rate, ' 이거 아닌것 같아!!');
     if (rate > 90) {
       //아주우수
-      return '금메달' + 1; //금메달
-    } else if (rate <= 90 && rate > 80) {
+      return 3; //금메달
+    } else if (rate <= 90 && rate > 70) {
       //준수
-      return '은메달' + 2; //은메달
+      return 2; //은메달
       은메달;
-    } else if (rate <= 80 && rate >= 75) {
+    } else if (rate <= 70 && rate >= 50) {
       //성의는 봐줌.
-      return '동메달' + 3; //동메달
+      return 1; //동메달
     } else {
-      return '바보' + 4; //실패
+      return 0; //실패
     }
   };
   const submitWeight = () => {
@@ -70,7 +72,11 @@ const MissionCheckScreen = ({navigation: {goBack}}) => {
       {
         text: 'Finish!',
         onPress: () => {
-          console.log(checkRateWeight());
+          value.result = value.weight;
+          value.medal = checkRateWeight();
+          console.log(value.medal, '-.-');
+          console.log(value.weight, '!!');
+          console.log(value.result, '>.<');
           goBack();
           value.weight = 0;
         },

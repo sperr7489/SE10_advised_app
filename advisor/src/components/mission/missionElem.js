@@ -29,16 +29,6 @@ const MissionElem = props => {
     setMissionWeight(props.weight);
     setEndTime(props.endTime);
   }, []);
-  useEffect(() => {
-    console.log(value.weight);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      setCheckToggle(checkToggle);
-      console.log(checkToggle);
-    };
-  }, []);
   return (
     <View style={styles.container}>
       <View
@@ -114,7 +104,7 @@ const MissionElem = props => {
                     text: 'yes..',
                     onPress: () => {
                       setCheckToggle(true);
-                      value.weight -= missionWeight;
+                      //   value.weight -= missionWeight;
                     },
                   },
                 ],

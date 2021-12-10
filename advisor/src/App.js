@@ -15,7 +15,7 @@ import {signInWithEmailAndPassword} from '@firebase/auth';
 import {useNavigation} from '@react-navigation/core';
 import {NavigationEvents} from 'react-navigation';
 import {Contents, Footer} from './components/Layout';
-
+import WeightContext from './Context/weightContext';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 
@@ -121,16 +121,9 @@ function HomeScreen({navigation: {navigate}}) {
 
 const Stack = createNativeStackNavigator();
 
-const 체중 = 100;
-function reducer(state = 체중, action) {
-  return state;
-}
-
-let store = createStore(reducer);
-
 function App() {
   return (
-    <Provider store={store}>
+    <WeightContext>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
@@ -144,7 +137,7 @@ function App() {
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </Provider>
+    </WeightContext>
   );
 }
 
