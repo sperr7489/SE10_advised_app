@@ -1,18 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Button, ScrollView, FlatList} from 'react-native';
+import {View, Text, Button, ScrollView, FlatList, Alert} from 'react-native';
 import {db} from '../../../firebase-config';
 import {collection, getDocs, setDoc, doc} from 'firebase/firestore/lite';
 import MissionElem from '../../components/mission/missionElem';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SectionList} from 'react-native';
-import {Value} from 'react-native-reanimated';
-
+import {cos, Value} from 'react-native-reanimated';
+import WeightContext from '../../Context/weightContext';
+import {useContext} from 'react';
+import {WContext} from '../../Context/weightContext';
+import MissionCheckButton from '../../components/MissionCheckButton';
 const Item = ({title}) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
 );
-const MissionCheckScreen = () => {
+const MissionCheckScreen = ({navigation: {goBack}}) => {
+  const [totalWeight, setTotalWeight] = useState(0);
+  var test = 0;
   // const getData = async () => {
   //   const citiesCol = collection(db, 'cities');
   //   const citySnapshot = await getDocs(citiesCol);
@@ -21,7 +26,7 @@ const MissionCheckScreen = () => {
   //   console.log(cityList);
   // };
   const [missionList, setMissionList] = useState([]);
-
+  const value = useContext(WContext);
   const getData = async () => {
     const missionCol = collection(db, 'mission');
     const missionSnapshot = await getDocs(missionCol);
@@ -33,55 +38,71 @@ const MissionCheckScreen = () => {
     getData();
     // console.log(missionList[0]);
     missionList.map(x => {
-      console.log(Object.keys(x), '이것이 key값들이다');
-      console.log(Object.values(x));
+      test += Number(x.weight);
+      console.log(x.weight, typeof x.weight);
     });
+    setTotalWeight(test);
   }, []);
 
-  const setData = async () => {
-    const city = 'Gunpo';
-    // const citiesCol = collection(db, 'cities');
-    // const citySnapshot = await getDocs(citiesCol);
-    // const cityList = citySnapshot.docs.map(doc => doc.data());
-    // console.log(cityList);
-    // Add a new document in collection "cities"
-    await setDoc(doc(db, 'cities', 'good'), {
-      start_time: '2021/12/08 17:16',
-      end_time: '2021/12/08 20:16',
-      mission_content: '이것은 정말 재밌는 것 같아.',
-      weight: 6,
-    });
-    // const docRef = await addDoc(collection(db, 'cities'), {
-    //   city_name: 'Tokyo',
-    // });
-    // console.log('Document written with ID: ', docRef.id);
+  const checkRateWeight = () => {
+    const rate = Math.round((value.weight / totalWeight) * 100);
+    if (rate > 90) {
+      //아주우수
+      return '금메달' + 1; //금메달
+    } else if (rate <= 90 && rate > 80) {
+      //준수
+      return '은메달' + 2; //은메달
+      은메달;
+    } else if (rate <= 80 && rate >= 75) {
+      //성의는 봐줌.
+      return '동메달' + 3; //동메달
+    } else {
+      return '바보' + 4; //실패
+    }
   };
+  const submitWeight = () => {
+    Alert.alert('정말 모든 미션들을 수행하신 것인가요???', '', [
+      {
+        text: 'More...',
+        onPress: () => console.log('좀더 파이팅!'),
+        style: 'cancel',
+      },
+      {
+        text: 'Finish!',
+        onPress: () => {
+          console.log(checkRateWeight());
+          goBack();
+          value.weight = 0;
+        },
+      },
+    ]);
+  };
+  console.log(totalWeight);
   return (
     <View>
-      <SafeAreaView>
-        <FlatList
-          data={missionList}
-          renderItem={({item}) => (
-            <MissionElem
-              type={item.missionType}
-              text={item.mission_content}
-              weight={item.weight}
-              endTime={item.end_time}
-            />
-          )}
-        />
-      </SafeAreaView>
+      <View>
+        <SafeAreaView>
+          <Button
+            onPress={() => {
+              submitWeight();
+            }}
+            title="미션완료"
+          />
+          <FlatList
+            ListFooterComponent={<View style={{height: 100}}></View>}
+            data={missionList}
+            renderItem={({item}) => (
+              <MissionElem
+                type={item.missionType}
+                text={item.mission_content}
+                weight={item.weight}
+                endTime={item.end_time}
+              />
+            )}></FlatList>
+        </SafeAreaView>
+      </View>
     </View>
   );
 };
 
 export default MissionCheckScreen;
-{
-  /* {missionList.map((i, x) => {
-        <MissionElem
-          type={i.missionType}
-          text={i.mission_content}
-          weight={i.weight}
-          endTime={i.end_time}></MissionElem>;
-      })} */
-}

@@ -42,7 +42,7 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Calender"
+        name="Calendar"
         component={CalenderScreen}
         options={{
           tabBarIcon: ({focused}) => (
@@ -61,7 +61,7 @@ const Tabs = () => {
                   color: focused ? '#e32f45' : '#748c94',
                   fontSize: 12,
                 }}>
-                Calender
+                Calendar
               </Text>
             </View>
           ),

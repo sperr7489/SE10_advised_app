@@ -96,6 +96,7 @@ export default function TimePicker(props) {
           value={text}
         />
         <DateTimePickerModal
+          minimumDate={props.minimum}
           headerTextIOS={placeholder}
           isVisible={isDatePickerVisible}
           mode="time"

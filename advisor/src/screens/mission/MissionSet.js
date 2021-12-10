@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Button, TextInput} from 'react-native';
+import {View, Text, StyleSheet, Button, TextInput, Alert} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MissionCheckButton from '../../components/MissionCheckButton';
 import MissionScreen from '../MissionScreen';
@@ -11,6 +11,7 @@ import {db} from '../../../firebase-config';
 import {setDoc, doc} from 'firebase/firestore/lite';
 
 global.count = 0;
+
 const MissionSetScreen = ({route}) => {
   // 이 컴포넌트에서 timepicker 컴포넌트로부터 받아온 값을 밑의 값에다가 입력해주도록 한다.
   const missionType = route.name;
@@ -18,12 +19,12 @@ const MissionSetScreen = ({route}) => {
   const [endTime, setEndTime] = useState('');
   const [missionDetail, setMissionDetail] = useState('');
   const [missionWeight, setMissionWeight] = useState('0');
+  // const [missionKey, setMissionKey] = useState(0);
   console.log(missionDetail);
   console.log(missionWeight);
   console.log(startTime);
   console.log(endTime);
   console.log(missionType);
-  const [missionKey, setMissionKey] = useState(1);
   const setData = async () => {
     // const citiesCol = collection(db, 'cities');
     // const citySnapshot = await getDocs(citiesCol);
@@ -31,15 +32,22 @@ const MissionSetScreen = ({route}) => {
     // console.log(cityList);
     // Add a new document in collection "cities"
     await setDoc(doc(db, 'mission', `${global.count}`), {
+      key: global.count,
       missionType: missionType,
       start_time: startTime,
       end_time: endTime,
       mission_content: missionDetail,
       weight: missionWeight,
+      key: global.count,
     });
     global.count++;
   };
 
+  {
+    if (startTime > endTime && endTime > '0') {
+      Alert.alert('종료시간을 다시 입력해주세요!', ' ');
+    }
+  }
   return (
     <View
       style={{
@@ -76,17 +84,7 @@ const MissionSetScreen = ({route}) => {
     </View>
   );
 };
-// function MyStack() {
-//   return (
-//     <Stack.Navigator screenOptions={{headerShown: false}}>
-//       <Stack.Screen name="미션 설정" component={MissionScreen} />
-//       <Stack.Screen name="Mission" component={MissionSetScreen} />
-//       {/* <Stack.Screen name="Notifications" component={NotificationsScreen} />
-//       <Stack.Screen name="Profile" component={ProfileScreen} />
-//       <Stack.Screen name="Settings" component={SettingsScreen} /> */}
-//     </Stack.Navigator>
-//   );
-// }
+
 const styles = StyleSheet.create({
   timeSet: {
     marginTop: 20,

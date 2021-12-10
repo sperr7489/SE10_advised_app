@@ -16,6 +16,7 @@ import MissionCheckScreen from './mission/MissionCheck';
 import {Contents, Footer, Header} from '../components/Layout';
 import MissionCheckButton from '../components/MissionCheckButton';
 import {color} from 'react-native-reanimated';
+import WeightContext from '../Context/weightContext';
 function HomeScreen() {
   return (
     <View
@@ -41,17 +42,19 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Mission" component={HomeScreen} />
-      <Stack.Screen name="학업" component={MissionSetScreen} />
-      <Stack.Screen name="기상" component={MissionSetScreen} />
-      <Stack.Screen name="운동" component={MissionSetScreen} />
-      <Stack.Screen name="업무" component={MissionSetScreen} />
-      <Stack.Screen name="미션 확인" component={MissionCheckScreen} />
-      {/* <Stack.Screen name="Notifications" component={NotificationsScreen} />
+    <WeightContext>
+      <Stack.Navigator>
+        <Stack.Screen name="Mission" component={HomeScreen} />
+        <Stack.Screen name="학업" component={MissionSetScreen} />
+        <Stack.Screen name="기상" component={MissionSetScreen} />
+        <Stack.Screen name="운동" component={MissionSetScreen} />
+        <Stack.Screen name="업무" component={MissionSetScreen} />
+        <Stack.Screen name="미션 확인" component={MissionCheckScreen} />
+        {/* <Stack.Screen name="Notifications" component={NotificationsScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} /> */}
-    </Stack.Navigator>
+    <Stack.Screen name="Settings" component={SettingsScreen} /> */}
+      </Stack.Navigator>
+    </WeightContext>
   );
 }
 
@@ -64,7 +67,7 @@ export default function MissionScreen() {
         justifyContent: 'space-around',
         backgroundColor: 'white',
       }}>
-      <View style={{flex: 8}}>
+      <View style={{flex: 8, paddingBottom: 30}}>
         <NavigationContainer
           theme={{
             colors: {
@@ -76,7 +79,6 @@ export default function MissionScreen() {
           <MyStack />
         </NavigationContainer>
       </View>
-      <Footer></Footer>
     </View>
   );
 }
