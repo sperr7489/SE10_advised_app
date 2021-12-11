@@ -5,11 +5,11 @@ import {StyleSheet} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import fail from '../../assets/icons/fail.png';
 
-import {WContext} from '../../Context/weightContext';
+import {WeightContext} from '../../Context/weightContext';
 
 import firestore from '@react-native-firebase/firestore';
-
 import {db} from '../../../firebase-config';
+
 const MissionElem = props => {
   //props를 통해서 다음과 같은 변수들에 데이터값들을 전달해준다.
   const [missionType, setMissionType] = useState('type');
@@ -18,10 +18,12 @@ const MissionElem = props => {
   const [endTime, setEndTime] = useState('2021/12/09 16:00 오후');
   const [isSelected, setSelection] = useState(false);
 
-  const value = useContext(WContext);
-
   const [checkToggle, setCheckToggle] = useState(false);
   const [failToggle, setFailToggle] = useState(false);
+
+  const {weightDispatch} = useContext(WeightContext);
+  const {weightPoint} = useContext(WeightContext);
+  //이를 사용할땐 weightPoint.weight으로 접근하도록 한다.
 
   useEffect(() => {
     setMissionType(props.type);
@@ -80,7 +82,8 @@ const MissionElem = props => {
             onValueChange={newValue => {
               setCheckToggle(checkToggle);
               if (newValue == true) {
-                value.weight += missionWeight;
+                const weight = weightPoint.weight + missionWeight;
+                weightDispatch(weight);
                 setFailToggle(true);
               } else {
                 setFailToggle(false);

@@ -6,17 +6,11 @@
 import * as React from 'react';
 import {Button, View, Text} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
-import {
-  createStackNavigator,
-  HeaderStyleInterpolators,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import MissionButton from '../components/MissionButton';
 import MissionSetScreen from './mission/MissionSet';
 import MissionCheckScreen from './mission/MissionCheck';
-import {Contents, Footer, Header} from '../components/Layout';
 import MissionCheckButton from '../components/MissionCheckButton';
-import {color} from 'react-native-reanimated';
-import WeightContext from '../Context/weightContext';
 function HomeScreen() {
   return (
     <View
@@ -42,19 +36,17 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-    <WeightContext>
-      <Stack.Navigator>
-        <Stack.Screen name="Mission" component={HomeScreen} />
-        <Stack.Screen name="학업" component={MissionSetScreen} />
-        <Stack.Screen name="기상" component={MissionSetScreen} />
-        <Stack.Screen name="운동" component={MissionSetScreen} />
-        <Stack.Screen name="업무" component={MissionSetScreen} />
-        <Stack.Screen name="미션 확인" component={MissionCheckScreen} />
-        {/* <Stack.Screen name="Notifications" component={NotificationsScreen} />
+    <Stack.Navigator>
+      <Stack.Screen name="Mission" component={HomeScreen} />
+      <Stack.Screen name="학업" component={MissionSetScreen} />
+      <Stack.Screen name="기상" component={MissionSetScreen} />
+      <Stack.Screen name="운동" component={MissionSetScreen} />
+      <Stack.Screen name="업무" component={MissionSetScreen} />
+      <Stack.Screen name="미션 확인" component={MissionCheckScreen} />
+      {/* <Stack.Screen name="Notifications" component={NotificationsScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
     <Stack.Screen name="Settings" component={SettingsScreen} /> */}
-      </Stack.Navigator>
-    </WeightContext>
+    </Stack.Navigator>
   );
 }
 

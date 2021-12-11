@@ -3,10 +3,15 @@ import {View, Text, Image, Pressable} from 'react-native';
 import siba from '../assets/avatar/siba.jpeg';
 
 import {db} from '../../firebase-config';
-import {WContext} from '../Context/weightContext';
 import {useState, useEffect, useContext} from 'react';
 import {collection, getDocs, setDoc, doc} from 'firebase/firestore/lite';
 import {StyleSheet} from 'react-native';
+import {validateEmail} from '../utils/common';
+
+import WeightContext from '../Context/weightContext';
+import ResultContext from '../Context/resultContext';
+import MedalContext from '../Context/medalContext';
+
 const ChatScreen = () => {
   const [chatTypenum, setChatTypeNum] = useState(0);
   const [chatList, setChatList] = useState([]);
@@ -14,7 +19,19 @@ const ChatScreen = () => {
   const [successRate, setSuccessRate] = useState(0);
   const [opacity, setOpacity] = useState(0);
 
-  const value = useContext(WContext);
+  // const value = useContext(WeightContext);
+
+  const [weight, setWeight] = useState(0);
+  const [result, setResult] = useState(0);
+  const [medal, setMedal] = useState(0);
+
+  const {weightDispatch} = useContext(WeightContext);
+  const {resultDispatch} = useContext(ResultContext);
+  const {medalDispatch} = useContext(MedalContext);
+
+  const {weightPoint} = useContext(WeightContext);
+  const {resultPoint} = useContext(ResultContext);
+  const {medalPoint} = useContext(MedalContext);
 
   const chatType = ['friends', 'professor', 'parent', 'older'];
   const chat = [
@@ -46,17 +63,19 @@ const ChatScreen = () => {
   ];
 
   const chatContent = () => {
-    if (value.medal != -1) {
+    if (medalPoint.medal === -1) {
+      //medal이 -1이라는 것은 아직 평가가 덜되었다는 뜻이므로 chatting이 보이며 안된다.
       setOpacity(0);
-      setSuccessRate(value.medal);
+      setSuccessRate(medalPoint.medal);
     } else {
       setOpacity(1);
-      setSuccessRate(value.medal);
+      setSuccessRate(medalPoint.medal);
     }
   };
   useEffect(() => {
     chatContent();
-  }, [value.medal]);
+    console.log(medalPoint.medal);
+  }, [medalPoint.medal]);
   // const getData = async () => {
   //   const chatCol = collection(db, 'chat');
   //   const chatSnapshot = await getDocs(chatCol);
@@ -107,7 +126,7 @@ const ChatScreen = () => {
             marginLeft: 10,
             opacity: opacity,
           }}>
-          {chat[3].professor}
+          {chat[medalPoint.medal][chatType[chatTypenum]]}
         </Text>
       </View>
     </View>

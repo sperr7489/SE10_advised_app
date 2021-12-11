@@ -96,7 +96,6 @@ export default function TimePicker(props) {
           value={text}
         />
         <DateTimePickerModal
-          minimumDate={props.minimum}
           headerTextIOS={placeholder}
           isVisible={isDatePickerVisible}
           mode="time"
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
   },
   textInput: {
     fontSize: 20,
@@ -120,7 +119,6 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: '#000000',
     borderWidth: 1,
-    borderRadius: 12,
     padding: 10,
     justifyContent: 'center',
   },

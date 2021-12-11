@@ -9,6 +9,7 @@ import MissionInPut from '../../components/MissionInput';
 import Missionweight from '../../components/MissionWeight';
 import {db} from '../../../firebase-config';
 import {setDoc, doc} from 'firebase/firestore/lite';
+import MissionSetCancelButton from '../../components/missionSetCancelButton';
 
 global.count = 0;
 
@@ -52,7 +53,7 @@ const MissionSetScreen = ({route}) => {
     <View
       style={{
         height: '100%',
-        backgroundColor: 'black',
+        backgroundColor: '#2ECCFA',
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -79,7 +80,7 @@ const MissionSetScreen = ({route}) => {
       </View>
       <View style={styles.button}>
         <MissionSetButton press={setData} name="확인" screenName="Mission" />
-        <MissionSetButton name="취소" screenName="Mission" />
+        <MissionSetCancelButton name="취소" screenName="Mission" />
       </View>
     </View>
   );
@@ -88,16 +89,16 @@ const MissionSetScreen = ({route}) => {
 const styles = StyleSheet.create({
   timeSet: {
     marginTop: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#2ECCFA',
     flex: 2,
     width: '90%',
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  contents: {backgroundColor: 'blue', flex: 3, width: '90%'},
-  missionWeight: {backgroundColor: 'yellow', flex: 1, width: '90%'},
+  contents: {backgroundColor: '#2ECCFA', flex: 3, width: '90%'},
+  missionWeight: {backgroundColor: '#2ECCFA', flex: 1, width: '90%'},
   button: {
-    backgroundColor: '#faaf',
+    backgroundColor: '#2ECCFA',
     marginBottom: 20,
     width: '90%',
     flexDirection: 'row',

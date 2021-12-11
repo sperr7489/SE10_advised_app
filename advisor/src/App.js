@@ -13,11 +13,8 @@ import {authentication} from '../firebase-config';
 import {db} from '../firebase-config';
 import {signInWithEmailAndPassword} from '@firebase/auth';
 import {useNavigation} from '@react-navigation/core';
-import {NavigationEvents} from 'react-navigation';
-import {Contents, Footer} from './components/Layout';
-import WeightContext from './Context/weightContext';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {Contents} from './components/Layout';
+import GlobalProvider from './Context/GlobalProvider.js/GlobalProvider';
 
 const Container = styled.View`
   flex: 1;
@@ -123,7 +120,7 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <WeightContext>
+    <GlobalProvider>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
@@ -137,7 +134,7 @@ function App() {
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </WeightContext>
+    </GlobalProvider>
   );
 }
 
