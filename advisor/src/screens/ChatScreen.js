@@ -119,15 +119,18 @@ const ChatScreen = () => {
           ]}>
           <Text style={{fontSize: 30}}>{chatType[chatTypenum]}</Text>
         </Pressable>
-        <Text
-          style={{
-            textAlign: 'left',
-            fontSize: 30,
-            marginLeft: 10,
-            opacity: opacity,
-          }}>
-          {chat[medalPoint.medal][chatType[chatTypenum]]}
-        </Text>
+
+        {medalPoint.medal !== -1 && (
+          <Text
+            style={{
+              textAlign: 'left',
+              fontSize: 30,
+              marginLeft: 10,
+              opacity: opacity,
+            }}>
+            {chat[medalPoint.medal][chatType[chatTypenum]]}
+          </Text>
+        )}
       </View>
     </View>
   );

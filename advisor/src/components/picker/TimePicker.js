@@ -76,11 +76,9 @@ export default function TimePicker(props) {
   };
 
   const handleConfirm = date => {
-    console.warn('dateFormat: ', date.format('yyyy/MM/dd'));
     hideDatePicker();
     onChangeText(date.format('yyyy/MM/dd HH : mm   a/p'));
     props.setTime(date.format('yyyy/MM/dd HH : mm   a/p'));
-    console.warn(text + '이것이맞아?');
   };
 
   return (
@@ -90,7 +88,7 @@ export default function TimePicker(props) {
           pointerEvents="none"
           style={styles.textInput}
           placeholder={placeholder}
-          placeholderTextColor="#000000"
+          placeholderTextColor="black"
           underlineColorAndroid="transparent"
           editable={false}
           value={text}
@@ -114,10 +112,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 20,
-    color: '#000000',
+    color: 'black',
     height: 50,
     width: '100%',
-    borderColor: '#000000',
+    borderColor: 'black',
     borderWidth: 1,
     padding: 10,
     justifyContent: 'center',

@@ -5,28 +5,15 @@ import {getFirestore} from 'firebase/firestore/lite';
 import {collection, getDocs} from 'firebase/firestore/lite';
 
 //구글 계정
-
 const firebaseConfig = {
-  apiKey: 'AIzaSyCsqexYk1eSfvDypRe32D4BJWwd4YPnX9Y',
-  authDomain: 'db-advisor.firebaseapp.com',
-  projectId: 'db-advisor',
-  storageBucket: 'db-advisor.appspot.com',
-  messagingSenderId: '244528658904',
-  appId: '1:244528658904:web:f439d35a14c2def72e5aad',
-  measurementId: 'G-H8FMZ4JNNG',
+  apiKey: 'AIzaSyC2EtS3CeskZ1X6qtfyOfQw3bZidWf0QRw',
+  authDomain: 'advisor-c6e22.firebaseapp.com',
+  projectId: 'advisor-c6e22',
+  storageBucket: 'advisor-c6e22.appspot.com',
+  messagingSenderId: '881063767920',
+  appId: '1:881063767920:web:e974ef27f1be859e2469b5',
+  measurementId: '${config.measurementId}',
 };
-
-//ajou계정
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyCImCIs_5TVoeaUXikwBKKqODQ8iSWlnSk',
-//   authDomain: 'db-advisior.firebaseapp.com',
-//   projectId: 'db-advisior',
-//   storageBucket: 'db-advisior.appspot.com',
-//   messagingSenderId: '859659070256',
-//   appId: '1:859659070256:web:387c9cf626922c4c7ef6f5',
-//   measurementId: '${config.measurementId}',
-// };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
